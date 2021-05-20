@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">CoffeeRewards</string>
+    <string name="enter_purchase_amount">Enter Purchase Amount</string>
+    <string name="redeem_rewards">Redeem Rewards</string>
+    <string name="new_user">Add New User</string>
+    <string name="add_purchase">Add Purchase</string>
+    <string name="no_available_rewards">0</string>
+
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+</resources>
