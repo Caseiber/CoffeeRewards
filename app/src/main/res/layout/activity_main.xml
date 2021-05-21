@@ -10,26 +10,26 @@
 
 <!--  Adds the purchase amount to the user's redeemable points  -->
     <Button
-            android:id="@+id/add_purchase_button"
+            android:id="@+id/button_add_purchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_purchase"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintTop_toBottomOf="@+id/purchase_amount"
+            app:layout_constraintTop_toBottomOf="@+id/text_purchase_amount"
             android:layout_marginTop="16dp"
     />
 
 <!--  Redeems one reward's worth of points  -->
     <Button
-            android:id="@+id/redeem_button"
+            android:id="@+id/button_redeem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/redeem_rewards"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_purchase_button"
+            app:layout_constraintTop_toBottomOf="@+id/button_add_purchase"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="0.787"
@@ -37,7 +37,7 @@
 
 <!--  For entering the purchase amount  -->
     <EditText
-            android:id="@+id/purchase_amount"
+            android:id="@+id/text_purchase_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
@@ -51,7 +51,7 @@
 
 <!--  To add new users to the users list -->
 <!--    <Button-->
-<!--            android:id="@+id/new_user_button"-->
+<!--            android:id="@+id/button_new_user"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
 <!--            android:text="@string/new_user"-->
@@ -64,14 +64,14 @@
 
 <!--  Shows the amount of points a user has available  -->
     <TextView
-            android:id="@+id/available_points"
+            android:id="@+id/text_user_points"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:textSize="24sp"
             android:gravity="center"
             android:hint="@string/no_available_rewards"
-            app:layout_constraintBottom_toTopOf="@+id/redeem_button"
+            app:layout_constraintBottom_toTopOf="@+id/button_redeem"
             android:layout_marginBottom="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +79,7 @@
 
     <!--  To be populated with users  -->
 <!--    <Spinner-->
-<!--            android:id="@+id/selectUserSpinner"-->
+<!--            android:id="@+id/spinner_select_user" -->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="wrap_content"-->
 <!--            app:layout_constraintStart_toStartOf="parent"-->
