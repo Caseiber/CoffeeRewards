@@ -1,22 +1,23 @@
 package com.example.coffeerewards
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.math.abs
 
+// The amount of points needed to redeem a reward
 const val redeemablePoints : Int = 10
 
+// The amount of points awarded per dollar spent on product
 const val pointsPerDollar : Int = 5
 
 class MainActivity : AppCompatActivity() {
-
     // Declare all the component variables
-    lateinit var editPurchase: EditText
-    lateinit var redeemable: TextView
+    private lateinit var textPurchaseAmount: EditText
+    private lateinit var textRedeemablePoints: TextView
     lateinit var buttonAddPurchase: Button
     lateinit var buttonRedeemPoints:Button
 
@@ -24,45 +25,45 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Set all the components to their variables
-        editPurchase  = findViewById(R.id.purchase_amount)
-        redeemable = findViewById(R.id.available_points)
-        buttonAddPurchase = findViewById(R.id.add_purchase_button)
-        buttonRedeemPoints = findViewById(R.id.redeem_button)
+        // Set all the components to their views
+        textPurchaseAmount  = findViewById(R.id.text_purchase_amount)
+        textRedeemablePoints = findViewById(R.id.text_user_points)
+        buttonAddPurchase = findViewById(R.id.button_add_purchase)
+        buttonRedeemPoints = findViewById(R.id.button_redeem)
 
         // Set the on click listeners
         buttonAddPurchase.setOnClickListener(addPurchaseListener)
         buttonRedeemPoints.setOnClickListener(redeemPointsListener)
 
         // Set initial values
-        redeemable.setText("0")
+        textRedeemablePoints.setText("0")
 
-        // Grey out and disable the button
+        // Gray out and disable the button
         buttonRedeemPoints.setAlpha(.5f)
         buttonRedeemPoints.isClickable = false
     }
 
-    // When the add purchase button is clicked, get the value of the purchase amount
+    // When the Add Purchase button is clicked, get the value of the purchase amount
     // and add the appropriate points to the redeemable points
     private val addPurchaseListener = View.OnClickListener { view ->
         when (view.getId()) {
-            R.id.add_purchase_button -> {
-                val purchaseAmount : CharSequence = editPurchase.getText()
+            R.id.button_add_purchase -> {
+                val purchaseAmount : CharSequence = textPurchaseAmount.getText()
                 val purchasedValue: Int = purchaseAmount.toString().toInt()
 
                 if (purchasedValue > 0) {
-                    // Get the current amount of points already held by the user
+                    // add the points to the amount the user already has
                     updateRedeemablePoints(purchasedValue / pointsPerDollar)
                 }
             }
         }
     }
 
-    // When the 'Redeem Points' button is pressed, remove the proper amount of points from the
+    // When the 'Redeem Rewards' button is pressed, remove the proper amount of points from the
     // redeemable points
     private val redeemPointsListener =  View.OnClickListener { view ->
         when (view.getId()) {
-            R.id.redeem_button -> {
+            R.id.button_redeem -> {
                 if (buttonRedeemPoints.isClickable) {
                     updateRedeemablePoints(-1 * redeemablePoints)
                 }
@@ -70,28 +71,34 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Update the amount of redeemable points available
     private fun updateRedeemablePoints(points : Int) {
-        // Get the current amount of points already held by the user
-        val currentPointsValue : CharSequence = redeemable.getText()
-        val currentPoints: Int = currentPointsValue.toString().toInt()
+        // Only update the redeemable points if there is an actual change
+        if (abs(points) > 0) {
+            // Get the current amount of points already held by the user
+            val currentPointsValue: CharSequence = textRedeemablePoints.getText()
+            val currentPoints: Int = currentPointsValue.toString().toInt()
 
-        val totalPoints = currentPoints + points
-        redeemable.setText(totalPoints.toString())
+            // Update the point value
+            val totalPoints = currentPoints + points
+            textRedeemablePoints.setText(totalPoints.toString())
 
-        // if the new number of points is enough to activate rewards, activate the 'redeem' button
-
-        if (totalPoints >= redeemablePoints) {
-            buttonRedeemPoints.enable()
-        } else {
-            buttonRedeemPoints.disable()
+            // If the new number of points is enough to activate rewards, activate the 'Redeem Rewards' button
+            if (totalPoints >= redeemablePoints) {
+                buttonRedeemPoints.enable()
+            } else {
+                buttonRedeemPoints.disable()
+            }
         }
     }
 
+    // Disables the 'Redeem Rewards' button if not enough points are available
     fun View.disable() {
         setAlpha(.5f);
         setClickable(false);
     }
 
+    // Enables the 'Redeem Rewards' button if enough points are available
     fun View.enable() {
         setAlpha(1f);
         setClickable(true);
