@@ -7,7 +7,7 @@
   ![](https://user-images.githubusercontent.com/35345068/119201315-a3a21c80-ba5c-11eb-9bff-a568288ad244.png)
   
 ## Usage (with current functionality)
-  Select whichever customer is making a purchase from the dropdown. Enter the dollar amount of the purchase made by the customer into the 'Enter Purchase Amount' field, and press 'Add Purchase'. The amount of points awarded will appear in the rewards field below. If enough points have been earned to receive a reward, the 'Redeem' rewards button will enable. When pressed, the amount of points needed for the reward will be removed from the total.
+  Select whichever customer is making a purchase from the dropdown. Enter the dollar amount of the purchase made by the customer into the 'Enter Purchase Amount' field, and press 'Add Purchase'. The amount of points awarded will appear in the rewards field below. If enough points have been earned to receive a reward, the 'Redeem Rewards' button will enable. When pressed, the amount of points needed for the reward will be removed from the total.
   
 ## Features
 ### Current
