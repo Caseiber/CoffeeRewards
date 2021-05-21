@@ -43,6 +43,7 @@
             android:inputType="numberDecimal"
             android:hint="@string/enter_purchase_amount"
             android:ems="10"
+            android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,15 +79,15 @@
     />
 
     <!--  To be populated with users  -->
-<!--    <Spinner-->
-<!--            android:id="@+id/spinner_select_user" -->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            android:layout_marginTop="92dp"-->
-<!--            app:layout_constraintHorizontal_bias="0.0"-->
-<!--    />-->
+    <Spinner
+            android:id="@+id/spinner_select_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="92dp"
+            app:layout_constraintHorizontal_bias="0.0"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
