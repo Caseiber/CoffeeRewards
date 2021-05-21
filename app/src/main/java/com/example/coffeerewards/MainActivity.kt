@@ -57,9 +57,12 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         // Create an ArrayAdapter using a simple spinner layout and languages array
         val arrAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfUsers)
+
         // Set layout to use when the list of choices appear
         arrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
         // Set Adapter to Spinner
+        spinnerSelectUser.setSelection(0)
         spinnerSelectUser.setAdapter(arrAdapter)
     }
 
@@ -83,7 +86,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         // Set initial values for user points
         currentUser = spinnerSelectUser.selectedItem as User
 
-        val userPoints = currentUser.points
+        val userPoints = currentUser.getPoints()
         textRedeemablePoints.setText(userPoints.toString())
 
         checkRedeemablePoints(userPoints)
@@ -127,8 +130,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
             // Update the point value
             val totalPoints = currentPoints + points
-            currentUser.points = totalPoints
-            textRedeemablePoints.setText(currentUser.points.toString())
+            currentUser.setPoints(totalPoints)
+            textRedeemablePoints.setText(currentUser.getPoints().toString())
 
             checkRedeemablePoints(totalPoints)
         }

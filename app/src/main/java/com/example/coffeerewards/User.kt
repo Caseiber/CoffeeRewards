@@ -6,7 +6,27 @@ import 	java.util.UUID
 class User (
    _name : String
 ) {
-   val id : UUID = UUID.randomUUID()
-   var points : Int = 0
-   val name : String = _name
+   private val id : UUID = UUID.randomUUID()
+   private var points : Int = 0
+   private val name : String = _name
+
+   override fun toString(): String {
+      return getName()
+   }
+
+   fun getID(): UUID {
+      return id
+   }
+
+   fun getPoints(): Int {
+      return points
+   }
+
+   fun setPoints(_points : Int) {
+      points = _points
+   }
+
+   fun getName(): String {
+      return name
+   }
 }
