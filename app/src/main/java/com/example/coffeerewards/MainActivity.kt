@@ -16,8 +16,8 @@ const val pointsPerDollar : Int = 5
 
 class MainActivity : AppCompatActivity() {
     // Declare all the component variables
-    private lateinit var textPurchaseAmount: EditText
-    private lateinit var textRedeemablePoints: TextView
+    lateinit var textPurchaseAmount: EditText
+    lateinit var textRedeemablePoints: TextView
     lateinit var buttonAddPurchase: Button
     lateinit var buttonRedeemPoints:Button
 
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Set all the components to their views
-        textPurchaseAmount  = findViewById(R.id.text_purchase_amount)
+        textPurchaseAmount = findViewById(R.id.text_purchase_amount)
         textRedeemablePoints = findViewById(R.id.text_user_points)
         buttonAddPurchase = findViewById(R.id.button_add_purchase)
         buttonRedeemPoints = findViewById(R.id.button_redeem)
