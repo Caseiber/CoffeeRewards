@@ -19,12 +19,13 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     lateinit var textRedeemablePoints: TextView
     lateinit var buttonAddPurchase: Button
     lateinit var buttonRedeemPoints: Button
+    lateinit var buttonAddUser: Button
     lateinit var spinnerSelectUser: Spinner
     lateinit var currentUser: User
 
     // For now, manually entering users
     // TODO: Load this data in from DB
-    var listOfUsers: MutableList<User> = mutableListOf(
+    private var listOfUsers: MutableList<User> = mutableListOf(
         User("Caroline Seiber"),
         User("Sinjin Seiber"),
         User("Alex Smith")
@@ -72,10 +73,12 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         textRedeemablePoints = findViewById(R.id.text_user_points)
         buttonAddPurchase = findViewById(R.id.button_add_purchase)
         buttonRedeemPoints = findViewById(R.id.button_redeem)
+        buttonAddUser= findViewById(R.id.button_add_user)
 
         // Set the on click listeners
         buttonAddPurchase.setOnClickListener(addPurchaseListener)
         buttonRedeemPoints.setOnClickListener(redeemPointsListener)
+        buttonAddUser.setOnClickListener(addUserListener)
 
         initializeUserPoints()
         textPurchaseAmount.setText("0")
@@ -116,6 +119,16 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 if (buttonRedeemPoints.isClickable) {
                     updateRedeemablePoints(-1 * redeemablePoints)
                 }
+            }
+        }
+    }
+
+    // When the Add User button is clicked, open a new page to add a new user
+    private val addUserListener = View.OnClickListener { view ->
+        when (view.getId()) {
+            R.id.button_add_user -> {
+            // I have no clue how to do this yet
+                listOfUsers.add(User("New User"))
             }
         }
     }
