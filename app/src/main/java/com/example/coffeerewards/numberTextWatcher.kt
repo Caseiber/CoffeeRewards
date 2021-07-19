@@ -11,7 +11,7 @@ class NumberTextWatcher(editText: EditText) : TextWatcher {
     override fun afterTextChanged(s: Editable) {
         et.removeTextChangedListener(this)
         //After all the text editing, if there is a string to validate - format it
-        if (s != null && !s.toString().isEmpty()) {
+        if (!s.toString().isEmpty()) {
             try {
                 //Take the input string and remove all formatting characters
                 val v: String = s.toString()

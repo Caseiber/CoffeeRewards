@@ -26,7 +26,7 @@ class User (
       points = _points
    }
 
-   fun getName(): String {
+   private fun getName(): String {
       return name
    }
 }

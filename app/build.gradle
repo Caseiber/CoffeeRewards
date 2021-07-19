@@ -15,6 +15,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -44,13 +46,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    compile "com.amazonaws:aws-android-sdk-core:2.6.+"
-    compile "com.amazonaws:aws-android-sdk-s3:2.6.+"
-    compile "com.amazonaws:aws-android-sdk-ddb:2.6.+"
-    compile "com.amazonaws:aws-android-sdk-core:2.4.4"
-    compile "com.amazonaws:aws-android-sdk-ddb:2.4.4"
-    compile "com.amazonaws:aws-android-sdk-ddb-document:2.4.4"
-
     implementation 'com.amplifyframework:aws-api:1.18.0'
     implementation 'com.amplifyframework:aws-datastore:1.18.0'
+
+    implementation "androidx.multidex:multidex:2.0.1"
 }

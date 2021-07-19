@@ -1,10 +1,11 @@
 package com.example.coffeerewards
 
-import AddUserDialog
+import NewUserDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import kotlin.math.abs
 
 // TODO: Make these values user-settable
@@ -16,13 +17,16 @@ const val pointsPerDollar : Int = 5
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     // Declare all the component variables
-    lateinit var textPurchaseAmount: EditText
-    lateinit var textRedeemablePoints: TextView
-    lateinit var buttonAddPurchase: Button
-    lateinit var buttonRedeemPoints: Button
-    lateinit var buttonAddUser: Button
-    lateinit var spinnerSelectUser: Spinner
-    lateinit var currentUser: User
+    private lateinit var textPurchaseAmount: EditText
+    private lateinit var textRedeemablePoints: TextView
+    private lateinit var buttonAddPurchase: Button
+    private lateinit var buttonRedeemPoints: Button
+    private lateinit var buttonAddUser: Button
+
+    private  lateinit var spinnerSelectUser: Spinner
+    private lateinit var currentUser: User
+
+    private var userDialog : DialogFragment = NewUserDialog()
 
     // For now, manually entering users
     // TODO: Load this data in from DB
@@ -55,7 +59,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     // Set up the user spinner, automatically choosing the first user in the list
     private fun initializeSpinner(listOfUsers: MutableList<User>) {
         spinnerSelectUser = findViewById(R.id.spinner_select_user)
-        spinnerSelectUser.setOnItemSelectedListener(this)
+        spinnerSelectUser.onItemSelectedListener = this
 
         // Create an ArrayAdapter using a simple spinner layout and languages array
         val arrAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listOfUsers)
@@ -65,7 +69,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         // Set Adapter to Spinner
         spinnerSelectUser.setSelection(0)
-        spinnerSelectUser.setAdapter(arrAdapter)
+        spinnerSelectUser.adapter = arrAdapter
     }
 
     // Set all the components to their views
@@ -91,7 +95,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         currentUser = spinnerSelectUser.selectedItem as User
 
         val userPoints = currentUser.getPoints()
-        textRedeemablePoints.setText(userPoints.toString())
+        textRedeemablePoints.text = userPoints.toString()
 
         checkRedeemablePoints(userPoints)
     }
@@ -99,9 +103,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     // When the Add Purchase button is clicked, get the value of the purchase amount
     // and add the appropriate points to the redeemable points
     private val addPurchaseListener = View.OnClickListener { view ->
-        when (view.getId()) {
+        when (view.id) {
             R.id.button_add_purchase -> {
-                val purchaseAmount: CharSequence = textPurchaseAmount.getText()
+                val purchaseAmount: CharSequence = textPurchaseAmount.text
                 val purchasedValue: Int = purchaseAmount.toString().toInt()
 
                 if (purchasedValue > 0) {
@@ -115,7 +119,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     // When the 'Redeem Rewards' button is pressed, remove the proper amount of points from the
     // redeemable points
     private val redeemPointsListener = View.OnClickListener { view ->
-        when (view.getId()) {
+        when (view.id) {
             R.id.button_redeem -> {
                 if (buttonRedeemPoints.isClickable) {
                     updateRedeemablePoints(-1 * redeemablePoints)
@@ -126,27 +130,28 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     // When the Add User button is clicked, open a new page to add a new user
     private val addUserListener = View.OnClickListener { view ->
-        when (view.getId()) {
+        when (view.id) {
             R.id.button_add_user -> {
-                AddUserDialog().show(supportFragmentManager, "AddUserFragment")
-            // I have no clue how to do this yet
-                listOfUsers.add(User("New User"))
+                userDialog = NewUserDialog()
+                userDialog.show(supportFragmentManager, "AddUserFragment")
             }
         }
     }
+
+
 
     // Update the amount of redeemable points available
     private fun updateRedeemablePoints(points: Int) {
         // Only update the redeemable points if there is an actual change
         if (abs(points) > 0) {
             // Get the current amount of points already held by the user
-            val currentPointsValue: CharSequence = textRedeemablePoints.getText()
+            val currentPointsValue: CharSequence = textRedeemablePoints.text
             val currentPoints: Int = currentPointsValue.toString().toInt()
 
             // Update the point value
             val totalPoints = currentPoints + points
             currentUser.setPoints(totalPoints)
-            textRedeemablePoints.setText(currentUser.getPoints().toString())
+            textRedeemablePoints.text = currentUser.getPoints().toString()
 
             checkRedeemablePoints(totalPoints)
         }
@@ -162,15 +167,19 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
     }
 
+    private fun addNewUser(name: String) {
+        listOfUsers.add(User(name))
+    }
+
     // Disables the 'Redeem Rewards' button if not enough points are available
     private fun View.disable() {
-        setAlpha(.5f);
-        setClickable(false);
+        alpha = .5f
+        isClickable = false
     }
 
     // Enables the 'Redeem Rewards' button if enough points are available
     private fun View.enable() {
-        setAlpha(1f);
-        setClickable(true);
+        alpha = 1f
+        isClickable = true
     }
 }
