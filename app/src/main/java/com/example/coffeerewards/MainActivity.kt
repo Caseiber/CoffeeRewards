@@ -1,5 +1,6 @@
 package com.example.coffeerewards
 
+import AddUserDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -127,6 +128,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private val addUserListener = View.OnClickListener { view ->
         when (view.getId()) {
             R.id.button_add_user -> {
+                AddUserDialog().show(supportFragmentManager, "AddUserFragment")
             // I have no clue how to do this yet
                 listOfUsers.add(User("New User"))
             }
